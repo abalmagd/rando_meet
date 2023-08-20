@@ -1,24 +1,27 @@
+
 import 'package:flutter/material.dart';
+import 'package:rando_meet/presentation/main_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-import 'features/landing/presentation/landing_screen.dart';
-
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Permission.camera.request();
+  await Permission.microphone.request();
+  await Permission.audio.request();
+  await Permission.videos.request();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Rando Meet',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-      home: const LandingScreen(),
+      theme: ThemeData(primarySwatch: Colors.purple),
+      home: const MainScreen(),
     );
   }
 }
